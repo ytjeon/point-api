@@ -25,10 +25,10 @@ spring:
     timeout-per-shutdown-phase: 30s
 
   log:
-    file-path: ~/log/point-api.log
+    file-path: ./log/point-api.log
 
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:mydata;MODE=MYSQL
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -36,6 +36,12 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  sql:
+    init:
+      mode: always # SQL 스크립트를 항상 실행 (never / embedded / always)
+      schema-locations: classpath:schema.sql # 기본값이지만 명시적 지정 가능
+      data-locations: classpath:data.sql     # 기본값이지만 명시적 지정 가능
+
 
 springdoc:
   api-docs:
@@ -54,3 +60,6 @@ springdoc:
     disabled: true
   model-and-view-allowed: true
 
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

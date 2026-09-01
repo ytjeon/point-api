@@ -15,19 +15,15 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI(){
         return new OpenAPI()
                 .info(new Info()
-                        .title("PG outbound-gateway api")
+                        .title("point api")
                 .version("1.0")
-                .description("PG outbound-gateway api doc 화면입니다."));
+                .description("point-api doc 화면입니다."));
     }
 
     @Bean
     public GroupedOpenApi api(){
         String[] paths = {"/api/**"};
-        String[] packagesToScan = {"kr.co.iaurora.pg.outbound.notice"
-                , "kr.co.iaurora.pg.outbound.icf"
-                ,"kr.co.iaurora.pg.outbound.ssh"
-                ,"kr.co.iaurora.pg.outbound.banking"
-        };
+        String[] packagesToScan = {"com.example.pointapi.controller"  };
         return GroupedOpenApi.builder().group("springdoc-openapi")
                 .pathsToMatch(paths)
                 .packagesToScan(packagesToScan)

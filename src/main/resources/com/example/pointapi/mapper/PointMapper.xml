@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pointapi.mapper.PointMapper">
+    <select id="getPointEvent" parameterType="String"  resultType="com.example.pointapi.model.PointEventMstDto">
+        select
+            point_event_key
+             , point_event_name
+             , point_accu_type
+             , case when point_accu_type='1' then '일반'
+                    when point_accu_type ='2' then '수기지급'
+                    else '미정의' end
+            as point_accu_type_name
+             , expire_days
+             , max_unit_point
+        from point_event_mst
+        where point_accu_type = #{pointAccuType}
+        order by point_event_key
+    </select>
+
+
+    <insert id="insertPointAccuMst" parameterType="com.example.pointapi.model.PointAccuMstDto">
+        insert into point_accu_mst(
+           point_event_key
+          ,order_no
+          ,accu_date
+          ,expire_date
+          ,user_no
+          ,accu_point
+          ,accu_cancel_yn
+          ,balance_point
+        )
+        values(
+           #{pointEventKey}
+          ,#{orderNo}
+          ,CURRENT_DATE()
+          ,DATEADD('DAY', #{expireDays}, CURRENT_DATE())
+          ,#{userNo}
+          ,#{accuPoint}
+          ,#{accuCancelYn}
+          ,#{balancePoint}
+        )
+    </insert>
+
+    <select id="getPointAccuList" parameterType="com.example.pointapi.model.PointAccuMstDto" resultType="com.example.pointapi.model.PointAccuMstDto">
+        select
+           a.point_key
+          ,a.point_event_key
+          ,a.order_no
+          ,a.accu_date
+          ,a.expire_date
+          ,a.user_no
+          ,a.accu_point
+          ,a.accu_cancel_yn
+          ,a.balance_point
+          ,b.point_accu_type
+        from point_accu_mst a
+        inner join point_event_mst b on a.point_event_key = b.point_event_key
+        <where>
+            <if test="userNo != null and userNo != 0 ">
+                and a.user_no = #{userNo}
+            </if>
+            <if test="pointKey != null and pointKey !=0">
+                and a.point_key = #{pointKey}
+            </if>
+            <if test="orderNo != null and orderNo !=0">
+                and a.order_no = #{orderNo}
+            </if>
+
+        </where>
+        and   a.accu_cancel_yn = 'N'
+    </select>
+
+    <update id="cancelSavePoint" parameterType="Long">
+        update point_accu_mst set
+            accu_cancel_yn = 'Y'
+        where point_key = #{pointKey}
+        and   accu_cancel_yn = 'N'
+        and   accu_point = balance_point
+    </update>
+
+</mapper>

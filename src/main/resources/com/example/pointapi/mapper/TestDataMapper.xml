@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pointapi.mapper.TestDataMapper">
+    <select id="selectAllUsers"  resultType="com.example.pointapi.model.UserMstDto">
+        select
+            user_no
+          , user_id
+          , user_name
+        from dms.user_mst
+        order by user_no
+    </select>
+
+    <select id="selectAllPointEvents"  resultType="com.example.pointapi.model.PointEventMstDto">
+        select
+            point_event_key
+          , point_event_name
+          , point_accu_type
+          , case when point_accu_type='1' then '일반'
+                 when point_accu_type ='2' then '수기지급'
+                 else '미정의' end
+              as point_accu_type_name
+          , expire_days
+          , max_unit_point
+        from point_event_mst
+        order by point_event_key
+    </select>
+
+    <select id="selectAllPointAccuMst" resultType="com.example.pointapi.model.PointAccuMstDto">
+        select
+              point_key
+             ,point_event_key
+             ,order_no
+             ,accu_date
+             ,expire_date
+             ,user_no
+             ,accu_point
+             ,accu_cancel_yn
+             ,balance_point
+        from point_accu_mst
+        order by point_key
+    </select>
+
+</mapper>
