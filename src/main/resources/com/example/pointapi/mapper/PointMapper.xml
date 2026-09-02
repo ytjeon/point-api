@@ -55,6 +55,7 @@
           ,a.accu_cancel_yn
           ,a.balance_point
           ,b.point_accu_type
+          ,b.expire_days
         from point_accu_mst a
         inner join point_event_mst b on a.point_event_key = b.point_event_key
         <where>

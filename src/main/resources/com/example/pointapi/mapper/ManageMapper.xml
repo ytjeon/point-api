@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.pointapi.mapper.TestDataMapper">
+<mapper namespace="com.example.pointapi.mapper.ManageMapper">
     <select id="selectAllUsers"  resultType="com.example.pointapi.model.UserMstDto">
         select
             user_no
@@ -40,4 +40,16 @@
         order by point_key
     </select>
 
+    <update id="modifyPointEvent" parameterType="com.example.pointapi.model.PointEventMstDto">
+        update point_event_mst set
+                  expire_days = ifnull(#{expireDays},expire_days)
+                , max_unit_point = ifnull(#{maxUnitPoint},max_unit_point)
+        where point_event_key = #{pointEventKey}
+    </update>
+
+    <update id="modifyExpireDate" parameterType="com.example.pointapi.model.PointAccuMstDto">
+        update point_accu_mst set
+            expire_date = #{expireDate}
+         where point_key = #{pointKey}
+    </update>
 </mapper>

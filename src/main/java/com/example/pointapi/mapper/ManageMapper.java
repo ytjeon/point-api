@@ -8,8 +8,11 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface TestDataMapper {
+public interface ManageMapper {
     List<UserMstDto> selectAllUsers();
     List<PointEventMstDto> selectAllPointEvents();
     List<PointAccuMstDto> selectAllPointAccuMst();
+
+    int modifyPointEvent(PointEventMstDto pointEventMstDto);
+    int modifyExpireDate(PointAccuMstDto pointAccuMstDto);
 }

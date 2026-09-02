@@ -12,10 +12,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class ReqPointDto {
-    @Schema(description="사용자번호", example="3" , required = true)
+    @Schema(description="사용자번호", example="303" , required = true)
     private Long userNo;
 
-    @Schema(description="주문번호", example="3000041219",required = true)
+    @Schema(description="주문번호", example="3000041219 or 0")
     private Long orderNo;
 
     @Schema(description="포인트", example="300",required = true)

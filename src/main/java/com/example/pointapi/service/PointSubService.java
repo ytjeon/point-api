@@ -60,6 +60,9 @@ public class PointSubService {
         if(point.compareTo(BigDecimal.ZERO) <= 0 ){
             return new ResponseObject<>(ResultCodeEnum.LIMITPOINT);
         }
+
+
+
         if(point.compareTo(maxUnit) > 0){
             return new ResponseObject<>(ResultCodeEnum.LIMITPOINT.getCode(),"1회 적립가능 포인트 최대는 " + maxUnit +" 이하 입니다.");
         }

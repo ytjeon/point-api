@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PointEventMstDto {
     private Long                 pointEventKey                            ;  // 포인트 이벤트 KEY
     private String               pointEventName                           ;  // 포인트 이벤트 이름

@@ -5,11 +5,15 @@ import com.example.pointapi.model.ReqPointDto;
 import com.example.pointapi.model.ResponseObject;
 import com.example.pointapi.service.PointService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 
 @RestController
@@ -28,39 +32,83 @@ public class PointController {
     @PostMapping("/saveNormalPoint")
     @Tag(name="")
     @Operation(summary = "적립(일반)" , description = "<ul><li>포인트를 적립합니다.</li></ul>")
-    public ResponseObject saveNormalPoint(@RequestBody ReqPointDto reqDto) {
+    @Parameter(name="userNo", description = "사용자 번호", example = "303")
+    @Parameter(name="orderNo", description = "주문번호", example = "3000004231")
+    @Parameter(name="point", description = "적립할 포인트", example = "400")
+    public ResponseObject saveNormalPoint(@RequestParam("userNo") Long userNo
+            ,@RequestParam("orderNo") Long orderNo
+            ,@RequestParam("point") BigDecimal point
+    ) {
+        ReqPointDto reqDto = ReqPointDto.builder()
+                .userNo(userNo)
+                .orderNo(orderNo)
+                .point(point)
+                .build();
+
         return pointService.saveNormalPoint(reqDto);
     }
 
     @PostMapping("/saveManualPoint")
     @Tag(name="")
     @Operation(summary = "적립(관리자 수기지급)" , description = "<ul><li>포인트를 적립합니다.</li></ul>")
-    public ResponseObject saveManualPoint(@RequestBody ReqPointDto reqDto) {
+    @Parameter(name="userNo", description = "사용자 번호", example = "303")
+    @Parameter(name="point", description = "적립할 포인트", example = "400")
+    public ResponseObject saveManualPoint(@RequestParam("userNo") Long userNo
+            ,@RequestParam("point") BigDecimal point
+    ) {
+        ReqPointDto reqDto = ReqPointDto.builder()
+                .userNo(userNo)
+                .orderNo(0L)
+                .point(point)
+                .build();
         return pointService.saveManualPoint(reqDto);
     }
 
     @GetMapping("/getBalancePointByUserNo")
     @Operation(summary = "사용자 잔액조회" , description = "<ul><li>특정 사용자의 포인트 잔액을 조회합니다.</li></ul>")
+    @Parameter(name="userNo", description = "사용자 번호", example = "303")
     public ResponseObject<BalancePointDto> getBalancePointByUserNo(@RequestParam("userNo") Long userNo) {
         return pointService.getBalancePointByUserNo(userNo);
     }
 
     @PostMapping("/cancelSavePoint")
     @Operation(summary = "적립취소" , description = "<ul><li>적립을 취소합니다</li><li>취소요청 입력값:pointKey</li></ul>")
-    public ResponseObject<BalancePointDto> cancelSavePoint(@RequestBody Long pointKey) {
+    @Parameter(name="pointKey", description = "포인트 KEY - 주문별 포인트 적립KEY. 1~", example = "3")
+    public ResponseObject<BalancePointDto> cancelSavePoint(@RequestParam("pointKey") Long pointKey) {
         return pointService.cancelSavePoint(pointKey);
     }
 
     @PostMapping("/usePoint")
     @Operation(summary = "포인트 사용" , description = "<ul><li>포인트를 사용(결제) 합니다..</li></ul>")
-    public ResponseObject<BalancePointDto> usePoint(@RequestBody ReqPointDto reqDto) {
+    @Parameter(name="userNo", description = "사용자 번호", example = "303")
+    @Parameter(name="orderNo", description = "주문번호", example = "3000004231")
+    @Parameter(name="point", description = "적립할 포인트", example = "400")
+    public ResponseObject<BalancePointDto> usePoint(@RequestParam("userNo") Long userNo
+            ,@RequestParam("orderNo") Long orderNo
+            ,@RequestParam("point") BigDecimal point) {
+
+        ReqPointDto reqDto = ReqPointDto.builder()
+                .userNo(userNo)
+                .orderNo(orderNo)
+                .point(point)
+                .build();
         return pointService.usePoint(reqDto);
     }
 //
     @PostMapping("/cancelUsePoint")
     @Operation(summary = "포인트 사용취소" , description = "<ul><li>사용(결제)했던 포인트를 취소합니다..</li>"
                                                            + "<li>만약 사용한 포인트가 현재 기준으로 유효기간이 만료가 되었다면 포인트를 신규로 적립합니다</li></ul>")
-    public ResponseObject<BalancePointDto> cancelUsePoint(@RequestBody ReqPointDto reqDto) {
+    @Parameter(name="userNo", description = "사용자 번호", example = "303")
+    @Parameter(name="orderNo", description = "주문번호", example = "3000004231")
+    @Parameter(name="point", description = "적립할 포인트", example = "400")
+    public ResponseObject<BalancePointDto> cancelUsePoint(@RequestParam("userNo") Long userNo
+            ,@RequestParam("orderNo") Long orderNo
+            ,@RequestParam("point") BigDecimal point) {
+        ReqPointDto reqDto = ReqPointDto.builder()
+                .userNo(userNo)
+                .orderNo(orderNo)
+                .point(point)
+                .build();
         return pointService.cancelUsePoint(reqDto);
     }
 

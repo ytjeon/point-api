@@ -27,15 +27,16 @@ values(
 set schema dms;
 
 insert into user_mst(
+    user_no,
     user_id,
     user_name
 )
 values(
-    'gildong' ,'홍길동')
-     ,('suzy', '배수지')
-     ,('samsun','김삼순')
-     ,('mavly','마동석')
-     ,('psinsa','박신사')
+    101,'gildong' ,'홍길동')
+     ,(202,'suzy', '배수지')
+     ,(303,'samsun','김삼순')
+     ,(404,'mavly','마동석')
+     ,(505,'psinsa','박신사')
 ;
 
 set schema point;
