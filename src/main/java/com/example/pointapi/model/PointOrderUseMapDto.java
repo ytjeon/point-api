@@ -10,10 +10,10 @@ import java.math.BigDecimal;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PointOrderUseMapDto {
     private Long        pointOrderUseMapNo;  // 번호
     private Long        pointOrderUseNo;     // 포인트 사용 기록 번호
     private Long        pointKey;            // 포인트KEY
-    private Long        userNo;             // 사용자 번호
     private BigDecimal  point;              // 포인트
 }

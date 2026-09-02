@@ -6,11 +6,10 @@ import com.example.pointapi.mapper.UserMapper;
 import com.example.pointapi.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -19,70 +18,32 @@ import java.util.List;
 public class PointService{
     private final PointMapper pointMapper;
     private final UserMapper userMapper;
-
-    @Transactional(rollbackFor = Exception.class)
-    public ResponseObject<BalancePointDto> savePoint(ReqPointDto reqDto, String accuType) {
-        // 사용자 조회
-        Long userNo = reqDto.getUserNo();
-        Long orderNo = reqDto.getOrderNo();
-
-        UserMstDto user = userMapper.getUser(userNo);
-        if(user == null){
-            return new ResponseObject<>(ResultCodeEnum.ERROR.getCode(), "존재하지 않는 사용자입니다");
-        }
-        String userName = user.getUserName();
-
-        // 포인트 적립행사 조회
-        PointEventMstDto pointEvent = pointMapper.getPointEvent(accuType);
-        if(pointEvent == null){
-            return new ResponseObject<>(ResultCodeEnum.ERROR.getCode(),"포인트 적립행사가 없습니다");
-        }
-        Long pointEventKey =  pointEvent.getPointEventKey();
-        Long expireDays = pointEvent.getExpireDays();
+    private final PointSubService pointSubService;
 
 
-
-        // 포인트 적립 최소/최대크기 점검
-        BigDecimal point = reqDto.getPoint();
-        BigDecimal maxUnit = pointEvent.getMaxUnitPoint();
-        if(point.compareTo(BigDecimal.ZERO) <= 0 ){
-            return new ResponseObject<>(ResultCodeEnum.LIMITPOINT);
-        }
-        if(point.compareTo(maxUnit) > 0){
-            return new ResponseObject<>(ResultCodeEnum.LIMITPOINT.getCode(),"1회 적립가능 포인트 최대는 " + maxUnit +" 이하 입니다.");
-        }
-
-        // 적립(insert)
-        PointAccuMstDto insAccu = PointAccuMstDto
-                .builder()
-                .userNo(userNo)
-                .accuCancelYn("N")
-                .orderNo(orderNo)
-                .expireDays(expireDays)
-                .balancePoint(point)
-                .accuPoint(point)
-                .pointEventKey(pointEventKey)
-                .build();
-        try {
-            pointMapper.insertPointAccuMst(insAccu);
-        } catch (DuplicateKeyException dke) {
-            return new ResponseObject<>(ResultCodeEnum.DUPLICATE);
-
-        }
-
-
-        return new ResponseObject<>(ResultCodeEnum.SUCCESS);
-    }
-
+    /**
+     * 포인트 적립(일반)
+     * @param reqDto
+     * @return
+     */
     public ResponseObject saveNormalPoint(ReqPointDto reqDto){
-        return savePoint(reqDto,"1");
+        return pointSubService.savePoint(reqDto,"1",0L);
     }
 
+    /**
+     * 포인트 적립(관리자 수기지급)
+     * @param reqDto
+     * @return
+     */
     public ResponseObject saveManualPoint(ReqPointDto reqDto) {
-        return savePoint(reqDto,"2");
+        return pointSubService.savePoint(reqDto,"2",0L);
     }
 
-    // 사용자 번호로 사용자의 잔액 상태 조회
+    /**
+     * 사용자 잔액 조회
+     * @param userNo
+     * @return
+     */
     public ResponseObject<BalancePointDto> getBalancePointByUserNo(Long userNo) {
         UserMstDto user = userMapper.getUser(userNo);
         if(user == null){
@@ -119,6 +80,12 @@ public class PointService{
         return new ResponseObject<>(ResultCodeEnum.SUCCESS.getCode(),"OK", balancePointDto);
     }
 
+    /**
+     *
+     * 적립취소
+     * @param pointKey
+     * @return
+     */
     public ResponseObject<BalancePointDto> cancelSavePoint(Long pointKey) {
         PointAccuMstDto selAccu = PointAccuMstDto.builder()
                 .pointKey(pointKey)
@@ -141,7 +108,7 @@ public class PointService{
             );
         }
 
-        // 적립금액과 잔액이 다를 경우 (즉 사용한 경우)
+        // 적립금액과 잔액이 다를 경우 =>즉 포인트를 사용했을 때는 취소불가
         if(!accuPoint.equals(balancePoint)){
             return new ResponseObject<>(ResultCodeEnum.CANCEL_NOT_ALLOWED);
         }
@@ -156,13 +123,89 @@ public class PointService{
            return getBalancePointByUserNo(userNo);
        }
     }
-//
-//    public ResponseObject<BalancePointDto> usePoint(ReqPointDto reqDto) {
-//    }
-//
-//    public ResponseObject<BalancePointDto> cancelUsePoint(ReqPointDto reqDto) {
-//    }
-//
-//    public ResponseObject<BalancePointDto> getBalancePointByUserNo(Long userNo) {
-//    }
+
+    /**
+     * 포인트 사용
+     * @param reqDto
+     * @return
+     */
+    public ResponseObject<BalancePointDto> usePoint(ReqPointDto reqDto) {
+        Long userNo = reqDto.getUserNo();
+        Long orderNo = reqDto.getOrderNo();
+        BigDecimal usePoint = reqDto.getPoint();
+
+
+        ResponseObject<BalancePointDto> bobj =  getBalancePointByUserNo(userNo);
+        ResultCodeEnum resultCode = ResultCodeEnum.findByCode(bobj.getResultCode());
+        if( resultCode == ResultCodeEnum.SUCCESS ){
+            BalancePointDto balancePointDto = bobj.getData();
+            BigDecimal totalBalancePoint = balancePointDto.getBalancePoint();
+            List<PointAccuMstDto> pointList = balancePointDto.getPointAccuMstDtoList();
+            if(totalBalancePoint.compareTo(usePoint) < 0){
+                // 잔액부족
+                return new ResponseObject<>(ResultCodeEnum.BALANCELIMIT);
+            } else{
+                // 이미 sql 쿼리로 정렬 했지만 혹시 모르니..
+                pointList.sort(
+                        Comparator.comparing(PointAccuMstDto::getPointAccuType).reversed() // 포인트 적립 타입: 내림차순
+                                .thenComparing(PointAccuMstDto::getExpireDate)           // 만료일자: 오름차순
+                );
+
+                // 포인트 사용 => 잔액 차감 update 작업
+                try {
+                    pointSubService.updateUsePoint(reqDto, pointList);
+                }catch (Exception e){
+                    log.error(e.getMessage());
+                    return new ResponseObject<>(ResultCodeEnum.ERROR);
+                }
+            }
+
+        } else{
+            return new ResponseObject<>(resultCode);
+        }
+
+        // 성공 결과로 잔액 조회
+        return getBalancePointByUserNo(userNo);
+    }
+
+
+    /**
+     * 포인트 사용취소
+     * @param reqDto
+     * @return
+     */
+    public ResponseObject<BalancePointDto> cancelUsePoint(ReqPointDto reqDto){
+        Long orderNo = reqDto.getOrderNo();
+        Long userNo  = reqDto.getUserNo();
+        BigDecimal cancelPoint = reqDto.getPoint();
+
+        // 포인트 사용취소할  포인트 주문 사용내역 잔액 조회
+        BigDecimal orderBalance = pointMapper.getPointOrderBalanceByOrderNo(orderNo);
+        if(orderBalance.compareTo(cancelPoint) < 0){
+            // 포인트 취소할 만큼의 금액이 없음
+            return new ResponseObject<>(ResultCodeEnum.BALANCELIMIT);
+        }
+
+        // 포인트 적립별(pointKey)  정보 조회
+        List<PointAccuMstDto> accuList = pointMapper.getPointAccuStatusByOrderNo(orderNo);
+        if(accuList.isEmpty()){
+            return new ResponseObject<>(ResultCodeEnum.NOTFOUND);
+        }
+
+        accuList.sort(
+                Comparator.comparing(PointAccuMstDto::getPointAccuType).reversed() // 포인트 적립 타입: 내림차순
+                        .thenComparing(PointAccuMstDto::getExpireDate)           // 만료일자: 오름차순
+        );
+
+        try {
+            pointSubService.updateCancelPoint(reqDto,accuList);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return new ResponseObject<>(ResultCodeEnum.ERROR);
+        }
+
+        return getBalancePointByUserNo(userNo);
+    }
+
+
 }

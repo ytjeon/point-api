@@ -28,6 +28,7 @@
           ,accu_point
           ,accu_cancel_yn
           ,balance_point
+          ,org_point_key
         )
         values(
            #{pointEventKey}
@@ -38,6 +39,7 @@
           ,#{accuPoint}
           ,#{accuCancelYn}
           ,#{balancePoint}
+          ,ifnull(#{orgPointKey},0)
         )
     </insert>
 
@@ -68,6 +70,8 @@
 
         </where>
         and   a.accu_cancel_yn = 'N'
+        and   a.balance_point > 0
+        order by point_accu_type desc, expire_date
     </select>
 
     <update id="cancelSavePoint" parameterType="Long">
@@ -78,4 +82,73 @@
         and   accu_point = balance_point
     </update>
 
+    <update id="updateBalance4usePoint" parameterType="com.example.pointapi.model.UsePointDto">
+        update point_accu_mst set
+                balance_point = balance_point - #{usePoint}
+        where   point_key = #{pointKey}
+          and   accu_cancel_yn = 'N'
+          and   balance_point >= #{usePoint}
+    </update>
+
+    <update id="updateBalance4useCancel" parameterType="com.example.pointapi.model.UsePointDto">
+        update point_accu_mst set
+            balance_point = balance_point + #{usePoint}
+        where   point_key = #{pointKey}
+          and   accu_cancel_yn = 'N'
+          and   accu_point >= (balance_point + #{usePoint})
+    </update>
+
+    <insert id="insertPointOrderUseHst" parameterType="com.example.pointapi.model.PointOrderUseHstDto"
+        useGeneratedKeys="true" keyProperty="pointOrderUseNo">
+        insert into point_order_use_hst( order_no
+                                       , trade_dt
+                                       , point_trade_type
+                                       , user_no
+                                       , point)
+        values(
+               #{orderNo}
+             , current_timestamp()
+             ,#{pointTradeType}
+             ,#{userNo}
+             ,#{point}
+              )
+    </insert>
+
+    <insert id="insertPointOrderUseMap" parameterType="com.example.pointapi.model.PointOrderUseMapDto">
+            insert into point_order_use_map(
+                 point_order_use_no
+                ,point_key
+                ,point
+            )
+           values
+            (
+                #{pointOrderUseNo}
+               ,#{pointKey}
+               ,#{point}
+            )
+    </insert>
+
+    <select id="getPointOrderBalanceByOrderNo" parameterType="Long" resultType="BigDecimal">
+        select
+               sum(a.point) as use_order_balance
+        from point_order_use_hst a
+        where a.order_no = #{orderNo}
+    </select>
+
+    <select id="getPointAccuStatusByOrderNo" parameterType="Long" resultType="com.example.pointapi.model.PointAccuMstDto">
+        select
+            b.point_key
+             , c.expired_date
+             , c.point_accu_type
+             , c.balance_point
+             , d.point_accu_type
+             , d.expire_days
+             , c.point_event_key
+        from point_order_use_hst a
+                 inner join  point_order_use_map b on a.point_order_use_no = b.point_order_use_no
+                 inner join  point_accu_mst c on b.point_key = c.point_key
+                 inner join  point_event_mst d on c.point_event_key = d.point_event_key
+        where a.order_no = #{orderNo}
+        group by 1,2,3,4
+    </select>
 </mapper>

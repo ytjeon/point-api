@@ -18,7 +18,6 @@ public class PointAccuMstDto {
     private Long                 pointEventKey                             ;  // 포인트 이벤트 KEY
     private Long                 orderNo                                  ;  // (적립을 하게된 계기의) 주문번호
     private Long                 orgPointKey                              ;  // 원 포인트 적립번호. 유효기간 경과된 건 사용취소시 적립
-    private String               manualRegId                              ;  // 수기지급 담당자 아이디
     private String               accuDate                              ;  // 적립일자
     private String               expireDate                               ;  // 만료일자
     private Long                 userNo                                   ;  // 사용자 번호
@@ -28,5 +27,5 @@ public class PointAccuMstDto {
 
     private Long                 expireDays;
     private String               pointAccuType;
-
+    private BigDecimal           userOrderBalance;
 }

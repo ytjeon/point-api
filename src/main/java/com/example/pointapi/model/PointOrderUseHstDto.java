@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PointOrderUseHstDto{
     private Long                 pointOrderUseNo                          ;  // 포인트 적립/사용 기록 번호
     private Long                 orderNo                                  ;  // 주문번호

@@ -46,23 +46,22 @@ public class PointController {
     }
 
     @PostMapping("/cancelSavePoint")
-    @Operation(summary = "적립취소" , description = "<ul><li>적립을 취소합니다</li></ul>")
+    @Operation(summary = "적립취소" , description = "<ul><li>적립을 취소합니다</li><li>취소요청 입력값:pointKey</li></ul>")
     public ResponseObject<BalancePointDto> cancelSavePoint(@RequestBody Long pointKey) {
         return pointService.cancelSavePoint(pointKey);
     }
+
+    @PostMapping("/usePoint")
+    @Operation(summary = "포인트 사용" , description = "<ul><li>포인트를 사용(결제) 합니다..</li></ul>")
+    public ResponseObject<BalancePointDto> usePoint(@RequestBody ReqPointDto reqDto) {
+        return pointService.usePoint(reqDto);
+    }
 //
-//    @PostMapping("/usePoint")
-//    public ResponseObject<BalancePointDto> usePoint(@RequestBody ReqPointDto reqDto) {
-//        return pointService.usePoint(reqDto);
-//    }
-//
-//    @PostMapping("/cancelUsePoint")
-//    public ResponseObject<BalancePointDto> cancelUsePoint(@RequestBody ReqPointDto reqDto) {
-//        return pointService.cancelUsePoint(reqDto);
-//    }
-//
-//    @GetMapping("/getBalacePointByUserNo")
-//    public ResponseObject<BalancePointDto> getBalancePointByUserNo(@RequestParam Long userNo) {
-//        return pointService.getBalancePointByUserNo(userNo);
-//    }
+    @PostMapping("/cancelUsePoint")
+    @Operation(summary = "포인트 사용취소" , description = "<ul><li>사용(결제)했던 포인트를 취소합니다..</li>"
+                                                           + "<li>만약 사용한 포인트가 현재 기준으로 유효기간이 만료가 되었다면 포인트를 신규로 적립합니다</li></ul>")
+    public ResponseObject<BalancePointDto> cancelUsePoint(@RequestBody ReqPointDto reqDto) {
+        return pointService.cancelUsePoint(reqDto);
+    }
+
 }
