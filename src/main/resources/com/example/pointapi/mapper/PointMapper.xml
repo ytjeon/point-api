@@ -139,8 +139,7 @@
     <select id="getPointAccuStatusByOrderNo" parameterType="Long" resultType="com.example.pointapi.model.PointAccuMstDto">
         select
             b.point_key
-             , c.expired_date
-             , c.point_accu_type
+             , c.expire_date
              , c.balance_point
              , d.point_accu_type
              , d.expire_days

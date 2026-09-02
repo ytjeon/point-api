@@ -190,11 +190,11 @@ public class PointSubService {
                 savePoint(newDto,pointAccuType,pointKey);
             } else{ // 기간 유효할 경우
                 BigDecimal balancePoint = po.getBalancePoint();
-                BigDecimal realCancelPoint = balancePoint.subtract(remainCanceldPoint);
+                BigDecimal  tmpPoint = balancePoint.add(remainCanceldPoint);
 
                 //  -- 1. 잔액 복구
                 UsePointDto usePointDto = null;
-                if(realCancelPoint.compareTo(BigDecimal.ZERO) < 0){
+                if(tmpPoint.compareTo(BigDecimal.ZERO) < 0){
                     usePointDto = new UsePointDto(pointKey, realCancelPoint);
 
 
