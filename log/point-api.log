@@ -1,0 +1,174 @@
+2026-09-02 21:12:34.201 [background-preinit]  INFO org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2026-09-02 21:12:34.216 [main]  INFO com.example.pointapi.PointApiApplication - Starting PointApiApplication using Java 21.0.11 with PID 21224 (/Users/martin/workspace/musinsa/point-api/build/classes/java/main started by martin in /Users/martin/workspace/musinsa/point-api)
+2026-09-02 21:12:34.216 [main]  INFO com.example.pointapi.PointApiApplication - No active profile set, falling back to 1 default profile: "default"
+2026-09-02 21:12:34.740 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7890 (http)
+2026-09-02 21:12:34.745 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:12:34.745 [main]  INFO org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-09-02 21:12:34.745 [main]  INFO org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-09-02 21:12:34.762 [main]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-09-02 21:12:34.762 [main]  INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 534 ms
+2026-09-02 21:12:34.802 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-09-02 21:12:34.875 [main]  INFO com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mydata user=SA
+2026-09-02 21:12:34.876 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-09-02 21:12:35.109 [main]  INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:mydata'
+2026-09-02 21:12:35.128 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:12:35.132 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7890 (http) with context path '/'
+2026-09-02 21:12:35.135 [main]  INFO com.example.pointapi.PointApiApplication - Started PointApiApplication in 1.139 seconds (process running for 1.405)
+2026-09-02 21:12:35.136 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-02 21:12:35.136 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /swagger-ui endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-02 21:22:50.633 [SpringApplicationShutdownHook]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-02 21:22:50.638 [tomcat-shutdown]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-09-02 21:22:50.641 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-09-02 21:22:50.644 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-09-02 21:22:52.140 [background-preinit]  INFO org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2026-09-02 21:22:52.154 [main]  INFO com.example.pointapi.PointApiApplication - Starting PointApiApplication using Java 21.0.11 with PID 22920 (/Users/martin/workspace/musinsa/point-api/build/classes/java/main started by martin in /Users/martin/workspace/musinsa/point-api)
+2026-09-02 21:22:52.154 [main]  INFO com.example.pointapi.PointApiApplication - No active profile set, falling back to 1 default profile: "default"
+2026-09-02 21:22:52.499 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7890 (http)
+2026-09-02 21:22:52.503 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:22:52.504 [main]  INFO org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-09-02 21:22:52.504 [main]  INFO org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-09-02 21:22:52.521 [main]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-09-02 21:22:52.522 [main]  INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 357 ms
+2026-09-02 21:22:52.554 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-09-02 21:22:52.615 [main]  INFO com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mydata user=SA
+2026-09-02 21:22:52.616 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-09-02 21:22:52.838 [main]  INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:mydata'
+2026-09-02 21:22:52.858 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:22:52.862 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7890 (http) with context path '/'
+2026-09-02 21:22:52.866 [main]  INFO com.example.pointapi.PointApiApplication - Started PointApiApplication in 0.851 seconds (process running for 1.033)
+2026-09-02 21:22:52.867 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-02 21:22:52.867 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /swagger-ui endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-02 21:23:20.870 [http-nio-7890-exec-1]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-02 21:23:20.870 [http-nio-7890-exec-1]  INFO org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-09-02 21:23:20.871 [http-nio-7890-exec-1]  INFO org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-09-02 21:23:21.076 [http-nio-7890-exec-9]  INFO org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 90 ms
+2026-09-02 21:32:24.996 [SpringApplicationShutdownHook]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-02 21:32:25.000 [tomcat-shutdown]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-09-02 21:32:25.003 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-09-02 21:32:25.005 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-09-02 21:32:26.468 [background-preinit]  INFO org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2026-09-02 21:32:26.481 [main]  INFO com.example.pointapi.PointApiApplication - Starting PointApiApplication using Java 21.0.11 with PID 24519 (/Users/martin/workspace/musinsa/point-api/build/classes/java/main started by martin in /Users/martin/workspace/musinsa/point-api)
+2026-09-02 21:32:26.481 [main]  INFO com.example.pointapi.PointApiApplication - No active profile set, falling back to 1 default profile: "default"
+2026-09-02 21:32:26.820 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7890 (http)
+2026-09-02 21:32:26.824 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:32:26.825 [main]  INFO org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-09-02 21:32:26.825 [main]  INFO org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-09-02 21:32:26.850 [main]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-09-02 21:32:26.850 [main]  INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 359 ms
+2026-09-02 21:32:26.904 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-09-02 21:32:26.987 [main]  INFO com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mydata user=SA
+2026-09-02 21:32:26.988 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-09-02 21:32:27.189 [main]  INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:mydata'
+2026-09-02 21:32:27.209 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:32:27.213 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7890 (http) with context path '/'
+2026-09-02 21:32:27.216 [main]  INFO com.example.pointapi.PointApiApplication - Started PointApiApplication in 0.878 seconds (process running for 1.069)
+2026-09-02 21:32:27.217 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-02 21:32:27.217 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /swagger-ui endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-02 21:34:46.652 [SpringApplicationShutdownHook]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-02 21:34:46.655 [tomcat-shutdown]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-09-02 21:34:46.657 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-09-02 21:34:46.658 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-09-02 21:34:47.931 [background-preinit]  INFO org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2026-09-02 21:34:47.945 [main]  INFO com.example.pointapi.PointApiApplication - Starting PointApiApplication using Java 21.0.11 with PID 24924 (/Users/martin/workspace/musinsa/point-api/build/classes/java/main started by martin in /Users/martin/workspace/musinsa/point-api)
+2026-09-02 21:34:47.945 [main]  INFO com.example.pointapi.PointApiApplication - No active profile set, falling back to 1 default profile: "default"
+2026-09-02 21:34:48.271 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7890 (http)
+2026-09-02 21:34:48.278 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:34:48.279 [main]  INFO org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-09-02 21:34:48.279 [main]  INFO org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-09-02 21:34:48.294 [main]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-09-02 21:34:48.294 [main]  INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 339 ms
+2026-09-02 21:34:48.331 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-09-02 21:34:48.387 [main]  INFO com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mydata user=SA
+2026-09-02 21:34:48.388 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-09-02 21:34:48.577 [main]  INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:mydata'
+2026-09-02 21:34:48.594 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:34:48.598 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7890 (http) with context path '/'
+2026-09-02 21:34:48.601 [main]  INFO com.example.pointapi.PointApiApplication - Started PointApiApplication in 0.795 seconds (process running for 0.956)
+2026-09-02 21:34:48.602 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-02 21:34:48.602 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /swagger-ui endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-02 21:35:13.317 [http-nio-7890-exec-1]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-02 21:35:13.317 [http-nio-7890-exec-1]  INFO org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-09-02 21:35:13.317 [http-nio-7890-exec-1]  INFO org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-09-02 21:35:13.463 [http-nio-7890-exec-3]  INFO org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 87 ms
+2026-09-02 21:49:17.471 [SpringApplicationShutdownHook]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-02 21:49:17.476 [tomcat-shutdown]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-09-02 21:49:17.479 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-09-02 21:49:17.483 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-09-02 21:49:18.950 [background-preinit]  INFO org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2026-09-02 21:49:18.964 [main]  INFO com.example.pointapi.PointApiApplication - Starting PointApiApplication using Java 21.0.11 with PID 27256 (/Users/martin/workspace/musinsa/point-api/build/classes/java/main started by martin in /Users/martin/workspace/musinsa/point-api)
+2026-09-02 21:49:18.964 [main]  INFO com.example.pointapi.PointApiApplication - No active profile set, falling back to 1 default profile: "default"
+2026-09-02 21:49:19.313 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7890 (http)
+2026-09-02 21:49:19.322 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:49:19.323 [main]  INFO org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-09-02 21:49:19.323 [main]  INFO org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-09-02 21:49:19.337 [main]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-09-02 21:49:19.337 [main]  INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 363 ms
+2026-09-02 21:49:19.370 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-09-02 21:49:19.426 [main]  INFO com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mydata user=SA
+2026-09-02 21:49:19.427 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-09-02 21:49:19.622 [main]  INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:mydata'
+2026-09-02 21:49:19.639 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:49:19.642 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7890 (http) with context path '/'
+2026-09-02 21:49:19.646 [main]  INFO com.example.pointapi.PointApiApplication - Started PointApiApplication in 0.819 seconds (process running for 1.016)
+2026-09-02 21:49:19.646 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-02 21:49:19.646 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /swagger-ui endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-02 21:49:32.063 [http-nio-7890-exec-1]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-02 21:49:32.064 [http-nio-7890-exec-1]  INFO org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-09-02 21:49:32.064 [http-nio-7890-exec-1]  INFO org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-09-02 21:49:32.215 [http-nio-7890-exec-3]  INFO org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 86 ms
+2026-09-02 21:58:27.970 [SpringApplicationShutdownHook]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-02 21:58:27.974 [tomcat-shutdown]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-09-02 21:58:27.976 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-09-02 21:58:27.978 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-09-02 21:58:29.363 [background-preinit]  INFO org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2026-09-02 21:58:29.375 [main]  INFO com.example.pointapi.PointApiApplication - Starting PointApiApplication using Java 21.0.11 with PID 28766 (/Users/martin/workspace/musinsa/point-api/build/classes/java/main started by martin in /Users/martin/workspace/musinsa/point-api)
+2026-09-02 21:58:29.375 [main]  INFO com.example.pointapi.PointApiApplication - No active profile set, falling back to 1 default profile: "default"
+2026-09-02 21:58:29.725 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7890 (http)
+2026-09-02 21:58:29.729 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:58:29.730 [main]  INFO org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-09-02 21:58:29.730 [main]  INFO org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-09-02 21:58:29.744 [main]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-09-02 21:58:29.744 [main]  INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 358 ms
+2026-09-02 21:58:29.776 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-09-02 21:58:29.836 [main]  INFO com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mydata user=SA
+2026-09-02 21:58:29.837 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-09-02 21:58:30.036 [main]  INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:mydata'
+2026-09-02 21:58:30.053 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7890"]
+2026-09-02 21:58:30.056 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7890 (http) with context path '/'
+2026-09-02 21:58:30.060 [main]  INFO com.example.pointapi.PointApiApplication - Started PointApiApplication in 0.823 seconds (process running for 1.014)
+2026-09-02 21:58:30.061 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-02 21:58:30.061 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /swagger-ui endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-02 21:59:44.667 [http-nio-7890-exec-1]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-02 21:59:44.667 [http-nio-7890-exec-1]  INFO org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-09-02 21:59:44.668 [http-nio-7890-exec-1]  INFO org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-09-02 21:59:44.816 [http-nio-7890-exec-3]  INFO org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 85 ms
+2026-09-02 22:12:31.273 [SpringApplicationShutdownHook]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-02 22:12:31.278 [tomcat-shutdown]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-09-02 22:12:31.281 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-09-02 22:12:31.284 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-09-02 22:12:32.682 [background-preinit]  INFO org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2026-09-02 22:12:32.694 [main]  INFO com.example.pointapi.PointApiApplication - Starting PointApiApplication using Java 21.0.11 with PID 31055 (/Users/martin/workspace/musinsa/point-api/build/classes/java/main started by martin in /Users/martin/workspace/musinsa/point-api)
+2026-09-02 22:12:32.694 [main]  INFO com.example.pointapi.PointApiApplication - No active profile set, falling back to 1 default profile: "default"
+2026-09-02 22:12:33.025 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 7890 (http)
+2026-09-02 22:12:33.057 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7890"]
+2026-09-02 22:12:33.058 [main]  INFO org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-09-02 22:12:33.058 [main]  INFO org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-09-02 22:12:33.081 [main]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-09-02 22:12:33.081 [main]  INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 374 ms
+2026-09-02 22:12:33.122 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-09-02 22:12:33.183 [main]  INFO com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mydata user=SA
+2026-09-02 22:12:33.184 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-09-02 22:12:33.382 [main]  INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:mydata'
+2026-09-02 22:12:33.400 [main]  INFO org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7890"]
+2026-09-02 22:12:33.403 [main]  INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 7890 (http) with context path '/'
+2026-09-02 22:12:33.406 [main]  INFO com.example.pointapi.PointApiApplication - Started PointApiApplication in 0.853 seconds (process running for 1.016)
+2026-09-02 22:12:33.407 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-02 22:12:33.407 [main]  WARN org.springdoc.core.events.SpringDocAppInitializer - SpringDoc /swagger-ui endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-02 22:12:40.042 [http-nio-7890-exec-1]  INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-02 22:12:40.043 [http-nio-7890-exec-1]  INFO org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-09-02 22:12:40.044 [http-nio-7890-exec-1]  INFO org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-09-02 22:12:40.212 [http-nio-7890-exec-3]  INFO org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 103 ms
+2026-09-02 22:20:27.198 [SpringApplicationShutdownHook]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-02 22:20:27.202 [tomcat-shutdown]  INFO org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-09-02 22:20:27.204 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-09-02 22:20:27.206 [SpringApplicationShutdownHook]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

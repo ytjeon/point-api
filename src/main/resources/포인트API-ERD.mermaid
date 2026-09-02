@@ -1,0 +1,56 @@
+
+%% [AI사용 사항 안내]
+%% 이 ERD는 DDL 쿼리를 입력값으로  gemini에게 mermaid erd 작성을 의뢰하여 만들어 진 것을 밝힙니다. 
+
+erDiagram
+    %% DMS Schema
+    "dms.user_mst" {
+        BIGINT user_no PK "사용자 번호"
+        VARCHAR user_id "사용자 아이디"
+        VARCHAR user_name "사용자 이름"
+    }
+
+    %% Point Schema
+    "point.point_event_mst" {
+        BIGINT point_event_key PK "포인트 이벤트 KEY"
+        VARCHAR point_event_name "포인트 이벤트 이름"
+        CHAR point_accu_type "1:일반, 2:관리자 수기지급"
+        INT expire_days "유효기간 일자"
+        BIGINT max_unit_point "1회 최대포인트"
+    }
+
+    "point.point_accu_mst" {
+        BIGINT point_key PK "포인트 KEY"
+        BIGINT point_event_key FK "포인트 이벤트 KEY"
+        BIGINT user_no FK "사용자 번호"
+        BIGINT order_no "주문번호"
+        BIGINT org_point_key "원 포인트 적립번호"
+        DATE accu_date "적립일자"
+        DATE expire_date "만료일자"
+        BIGINT accu_point "적립 포인트"
+        CHAR accu_cancel_yn "적립 취소 여부"
+        BIGINT balance_point "포인트 잔액"
+    }
+
+    "point.point_order_use_hst" {
+        BIGINT point_order_use_no PK "포인트 사용 기록 번호"
+        BIGINT user_no FK "사용자 번호"
+        BIGINT order_no "주문번호"
+        TIMESTAMP trade_dt "거래일시"
+        CHAR point_trade_type "P:사용, C:사용취소"
+        BIGINT point "사용/취소 포인트"
+    }
+
+    "point.point_order_use_map" {
+        BIGINT point_order_use_map_no PK "번호"
+        BIGINT point_order_use_no FK "포인트 사용 기록 번호"
+        BIGINT point_key FK "포인트 적립 번호"
+        BIGINT point "사용한 포인트"
+    }
+
+    %% Relationships
+    "dms.user_mst" ||--o{ "point.point_accu_mst" : "적립 소유"
+    "dms.user_mst" ||--o{ "point.point_order_use_hst" : "사용 거래 수행"
+    "point.point_event_mst" ||--o{ "point.point_accu_mst" : "적립 규칙 적용"
+    "point.point_order_use_hst" ||--o{ "point.point_order_use_map" : "차감/복구 내역 분개"
+    "point.point_accu_mst" ||--o{ "point.point_order_use_map" : "잔액 차감 대상"
