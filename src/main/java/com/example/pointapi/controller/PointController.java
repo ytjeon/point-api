@@ -82,7 +82,7 @@ public class PointController {
     @Operation(summary = "포인트 사용" , description = "<ul><li>포인트를 사용(결제) 합니다..</li></ul>")
     @Parameter(name="userNo", description = "사용자 번호", example = "303")
     @Parameter(name="orderNo", description = "주문번호", example = "3000004231")
-    @Parameter(name="point", description = "적립할 포인트", example = "400")
+    @Parameter(name="point", description = "사용(결제)할 포인트", example = "400")
     public ResponseObject<BalancePointDto> usePoint(@RequestParam("userNo") Long userNo
             ,@RequestParam("orderNo") Long orderNo
             ,@RequestParam("point") BigDecimal point) {
@@ -100,7 +100,7 @@ public class PointController {
                                                            + "<li>만약 사용한 포인트가 현재 기준으로 유효기간이 만료가 되었다면 포인트를 신규로 적립합니다</li></ul>")
     @Parameter(name="userNo", description = "사용자 번호", example = "303")
     @Parameter(name="orderNo", description = "주문번호", example = "3000004231")
-    @Parameter(name="point", description = "적립할 포인트", example = "400")
+    @Parameter(name="point", description = "사용 취소 포인트", example = "400")
     public ResponseObject<BalancePointDto> cancelUsePoint(@RequestParam("userNo") Long userNo
             ,@RequestParam("orderNo") Long orderNo
             ,@RequestParam("point") BigDecimal point) {

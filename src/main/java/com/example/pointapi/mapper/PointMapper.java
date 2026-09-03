@@ -23,5 +23,5 @@ public interface PointMapper {
 
 
     BigDecimal getPointOrderBalanceByOrderNo(@Param("orderNo")  Long orderNo);
-    List<PointAccuMstDto> getPointAccuStatusByOrderNo(@Param("orderNo")  Long orderNo);
+    List<PointOrderUseMapDto> getPointAccuListByOrderNo(@Param("orderNo")  Long orderNo);
 }

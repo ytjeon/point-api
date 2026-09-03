@@ -109,15 +109,17 @@ public class PointSubService {
             UsePointDto usePointDto = null;
 
             if(tmpPoint.compareTo(BigDecimal.ZERO) < 0){
-                remainUsedPoint = tmpPoint.abs();
+                BigDecimal realUsePoint = balancePoint;
                 usePointDto = new UsePointDto(pointKey, balancePoint);
                 PointOrderUseMapDto useMapDto = PointOrderUseMapDto.builder()
                         .pointKey(pointKey)
-                        .point(balancePoint)
+                        .point(realUsePoint)
                         .build();
                 mapList.add(useMapDto);
+
+                remainUsedPoint = tmpPoint.abs();
             } else{
-                BigDecimal realUsePoint = remainUsedPoint.subtract(tmpPoint);
+                BigDecimal realUsePoint = remainUsedPoint;
                 usePointDto = new UsePointDto(pointKey, realUsePoint);
                 PointOrderUseMapDto useMapDto = PointOrderUseMapDto.builder()
                         .pointKey(pointKey)
@@ -143,7 +145,7 @@ public class PointSubService {
 
         // 포인트 주문 사용 insert
         PointOrderUseHstDto hstDto = PointOrderUseHstDto.builder()
-                .orderNo(orderNo)
+                .useOrderNo(orderNo)
                 .userNo(userNo)
                 .point(usePoint)
                 .pointTradeType("P")
@@ -158,7 +160,7 @@ public class PointSubService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void updateCancelPoint(ReqPointDto reqDto, List<PointAccuMstDto> accuList) {
+    public void updateCancelPoint(ReqPointDto reqDto, List<PointOrderUseMapDto> accuList) {
         Long orderNo = reqDto.getOrderNo();
         Long userNo  = reqDto.getUserNo();
         BigDecimal cancelPoint = reqDto.getPoint();
@@ -169,8 +171,10 @@ public class PointSubService {
         List<PointOrderUseMapDto> mapList = new ArrayList<>();
 
         BigDecimal remainCanceldPoint = cancelPoint;
-        for( PointAccuMstDto po : accuList  ){
+
+        for( PointOrderUseMapDto po : accuList  ){
             Long pointKey = po.getPointKey();
+
             String pointAccuType = po.getPointAccuType();
 
             // 만료일자 확인
@@ -189,37 +193,42 @@ public class PointSubService {
                         .build();
                 savePoint(newDto,pointAccuType,pointKey);
             } else{ // 기간 유효할 경우
-                BigDecimal balancePoint = po.getBalancePoint();
-                BigDecimal  tmpPoint = balancePoint.add(remainCanceldPoint);
+                // 일단 사용한 순서대로
+                BigDecimal remainUsePoint  = po.getPoint();
 
-                //  -- 1. 잔액 복구
-                UsePointDto usePointDto = null;
-                if(tmpPoint.compareTo(BigDecimal.ZERO) < 0){
-                    usePointDto = new UsePointDto(pointKey, realCancelPoint);
-
-
-                    PointOrderUseMapDto useMapDto = PointOrderUseMapDto.builder()
-                            .pointKey(pointKey)
-                            // 잔액을 계산(합산)하기 편하기 위해 취소는 음수 처리
-                            .point(realCancelPoint.multiply(BigDecimal.valueOf(-1)))
-                            .build();
-                    mapList.add(useMapDto);
-
-                    remainCanceldPoint = realCancelPoint.abs();
-                } else {
-                    usePointDto = new UsePointDto(pointKey, realCancelPoint);
-
-
-                    PointOrderUseMapDto useMapDto = PointOrderUseMapDto.builder()
-                            .pointKey(pointKey)
-                            // 잔액을 계산(합산)하기 편하기 위해 취소는 음수 처리
-                            .point(realCancelPoint.multiply(BigDecimal.valueOf(-1)))
-                            .build();
-                    mapList.add(useMapDto);
-
-                    remainCanceldPoint =  BigDecimal.ZERO;
+                // 남은 개별 잔액이 0보다 작거나 같을 때는 더 이상 진행할 필요 없음
+                // 사실 0보다 작을수는 없지만.. 혹시라도.....예방차원으로
+                if(remainUsePoint.compareTo(BigDecimal.ZERO) <= 0){
+                    continue;
                 }
 
+                UsePointDto usePointDto = null;
+                BigDecimal tmpPoint = remainUsePoint.subtract(remainCanceldPoint);
+                if(tmpPoint.compareTo(BigDecimal.ZERO) < 0){
+                    BigDecimal realCancelPoint = remainUsePoint;
+
+                    usePointDto = new UsePointDto(pointKey, realCancelPoint);
+                    PointOrderUseMapDto useMapDto = PointOrderUseMapDto.builder()
+                            .pointKey(pointKey)
+                            .point(realCancelPoint.multiply(BigDecimal.valueOf(-1)))
+                            .build();
+                    mapList.add(useMapDto);
+
+                    remainCanceldPoint = remainCanceldPoint.subtract(remainUsePoint);
+                } else{
+                    BigDecimal realCancelPoint = remainCanceldPoint;
+
+                    usePointDto = new UsePointDto(pointKey, realCancelPoint);
+                    PointOrderUseMapDto useMapDto = PointOrderUseMapDto.builder()
+                            .pointKey(pointKey)
+                            .point(realCancelPoint.multiply(BigDecimal.valueOf(-1)))
+                            .build();
+                    mapList.add(useMapDto);
+
+                    remainCanceldPoint = BigDecimal.ZERO;
+                }
+
+                // 포인트 적립원장에 잔액 갱신
                 int uptCnt = pointMapper.updateBalance4useCancel(usePointDto);
                 if(uptCnt == 0){
                     throw new RuntimeException("==== point balance update count 0");
@@ -228,17 +237,16 @@ public class PointSubService {
         }
 
 
-        //  -- 2. hst insert
-        //
+        // 포인트 주문 사용 insert
         PointOrderUseHstDto hstDto = PointOrderUseHstDto.builder()
-                .orderNo(orderNo)
+                .useOrderNo(orderNo)
                 .userNo(userNo)
-                // 잔액을 계산(합산)하기 편하기 위해 취소는 음수 처리
                 .point(cancelPoint.multiply(BigDecimal.valueOf(-1)))
+                .pointTradeType("C")
                 .build();
         pointMapper.insertPointOrderUseHst(hstDto);
 
-        //  -- 3. map insert
+        // 포인트 주문 사용 매핑 insert
         Long hstNo = hstDto.getPointOrderUseNo();
         mapList.forEach( m -> m.setPointOrderUseNo(hstNo));
         for(final PointOrderUseMapDto mapDto : mapList){pointMapper.insertPointOrderUseMap(mapDto);}

@@ -187,15 +187,12 @@ public class PointService{
         }
 
         // 포인트 적립별(pointKey)  정보 조회
-        List<PointAccuMstDto> accuList = pointMapper.getPointAccuStatusByOrderNo(orderNo);
+        List<PointOrderUseMapDto> accuList = pointMapper.getPointAccuListByOrderNo(orderNo);
         if(accuList.isEmpty()){
             return new ResponseObject<>(ResultCodeEnum.NOTFOUND);
         }
 
-        accuList.sort(
-                Comparator.comparing(PointAccuMstDto::getPointAccuType).reversed() // 포인트 적립 타입: 내림차순
-                        .thenComparing(PointAccuMstDto::getExpireDate)           // 만료일자: 오름차순
-        );
+
 
         try {
             pointSubService.updateCancelPoint(reqDto,accuList);

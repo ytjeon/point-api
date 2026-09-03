@@ -101,13 +101,13 @@
 
     <insert id="insertPointOrderUseHst" parameterType="com.example.pointapi.model.PointOrderUseHstDto"
         useGeneratedKeys="true" keyProperty="pointOrderUseNo">
-        insert into point_order_use_hst( order_no
+        insert into point_order_use_hst( use_order_no
                                        , trade_dt
                                        , point_trade_type
                                        , user_no
                                        , point)
         values(
-               #{orderNo}
+               #{useOrderNo}
              , current_timestamp()
              ,#{pointTradeType}
              ,#{userNo}
@@ -133,22 +133,29 @@
         select
                sum(a.point) as use_order_balance
         from point_order_use_hst a
-        where a.order_no = #{orderNo}
+        where a.use_order_no = #{orderNo}
     </select>
 
-    <select id="getPointAccuStatusByOrderNo" parameterType="Long" resultType="com.example.pointapi.model.PointAccuMstDto">
+    <select id="getPointAccuListByOrderNo" parameterType="Long" resultType="com.example.pointapi.model.PointOrderUseMapDto">
         select
-            b.point_key
-             , c.expire_date
-             , c.balance_point
-             , d.point_accu_type
-             , d.expire_days
-             , c.point_event_key
-        from point_order_use_hst a
-                 inner join  point_order_use_map b on a.point_order_use_no = b.point_order_use_no
-                 inner join  point_accu_mst c on b.point_key = c.point_key
-                 inner join  point_event_mst d on c.point_event_key = d.point_event_key
-        where a.order_no = #{orderNo}
-        group by 1,2,3,4
+             c.point_key
+            ,b.use_order_no
+            ,b.user_no
+            ,c.expire_date
+            ,c.accu_point
+            ,c.balance_point
+            ,d.point_event_key
+            ,d.expire_days
+            ,d.point_accu_type
+            ,sum(a.point) as point
+            ,min(a.point_order_use_map_no) as point_order_use_map_no
+        from point_order_use_map a
+                 inner join  point_order_use_hst b on a.point_order_use_no = b.point_order_use_no
+                 inner join  point_accu_mst c      on  a.point_key = c.point_key
+                 inner join  point_event_mst d     on c.point_event_key = d.point_event_key
+        where b.use_order_no = #{orderNo}
+        group by a.point_key
+        order by point_order_use_map_no, point_accu_type desc,expire_date
     </select>
+
 </mapper>
