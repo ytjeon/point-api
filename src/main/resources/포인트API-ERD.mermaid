@@ -35,7 +35,7 @@ erDiagram
     "point.point_order_use_hst" {
         BIGINT point_order_use_no PK "포인트 사용 기록 번호"
         BIGINT user_no FK "사용자 번호"
-        BIGINT order_no "주문번호"
+        BIGINT use_order_no "주문번호"
         TIMESTAMP trade_dt "거래일시"
         CHAR point_trade_type "P:사용, C:사용취소"
         BIGINT point "사용/취소 포인트"
