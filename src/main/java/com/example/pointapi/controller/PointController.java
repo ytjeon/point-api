@@ -33,7 +33,7 @@ public class PointController {
     @Tag(name="")
     @Operation(summary = "적립(일반)" , description = "<ul><li>포인트를 적립합니다.</li></ul>")
     @Parameter(name="userNo", description = "사용자 번호", example = "303")
-    @Parameter(name="orderNo", description = "주문번호", example = "3000004231")
+    @Parameter(name="orderNo", description = "주문번호(사실 그냥 0 넣어도 무방)", example = "0 or 3000004231")
     @Parameter(name="point", description = "적립할 포인트", example = "400")
     public ResponseObject saveNormalPoint(@RequestParam("userNo") Long userNo
             ,@RequestParam("orderNo") Long orderNo
