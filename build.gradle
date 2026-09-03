@@ -33,6 +33,9 @@ dependencies {
     // swagger
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.14"
 
+    // 테스트 페이지
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'

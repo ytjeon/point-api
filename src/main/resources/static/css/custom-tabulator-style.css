@@ -1,0 +1,109 @@
+/* ==========================================
+   Tabulator Business Custom Theme
+   ========================================== */
+
+/* 1. 테이블 전체 외곽선 및 기본 폰트 */
+.tabulator {
+    border: 1px solid #d9d9d9 !important;
+    background-color: #ffffff !important;
+    font-family: 'Pretendard', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif !important;
+    font-size: 13px !important; /* 비즈니스 시스템은 한 화면에 많은 데이터를 위해 12~13px 선호 */
+}
+
+/* 2. 헤더(Header) 스타일 */
+.tabulator .tabulator-header {
+    background-color: #f5f7fa !important; /* 차분한 연회색/연푸른색 배경 */
+    border-bottom: 2px solid #cbd5e1 !important; /* 헤더와 바디를 구분하는 굵은 선 */
+    color: #334155 !important;
+    font-weight: 600 !important;
+}
+
+
+/* 1. 글자 가로 가운데 + 세로 중앙 정렬 */
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+    display: flex !important;
+    align-items: center !important;      /* 세로 중앙 정렬 */
+    justify-content: center !important;  /* 가로 가운데 정렬 */
+    height: 100% !important;
+    padding: 0 25px 0 10px !important;          /* 글자가 테두리에 너무 붙지 않도록 좌우 여백 */
+    position:  relative !important; /* 정렬 화살표의 위치 기준점이 됨*/
+}
+
+/* 3. 굵은 글씨 & 4. 글자 잘림(말줄임표) 방지 */
+.tabulator .tabulator-header .tabulator-col .tabulator-col-title {
+    font-weight: 600 !important;         /* 3. 굵은 글씨 (bold 대신 600이 비즈니스 폰트에 더 깔끔함) */
+    text-align: center !important;       /* 텍스트 가로 중앙 정렬 */
+
+    /* 4. 글자 잘림 방지 */
+    white-space: nowrap !important;      /* 텍스트가 다음 줄로 넘어가지 않게 방지 */
+    overflow: visible !important;        /* 영역을 넘어가도 숨기지 않고 다 보여줌 */
+    text-overflow: clip !important;      /* '...' 말줄임표 제거 */
+}
+
+/* (옵션) 정렬 화살표 위치 조정 (가운데 정렬 시 화살표가 겹치지 않게 약간 띄움) */
+.tabulator .tabulator-header .tabulator-col .tabulator-col-sorter {
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    bottom: auto !important;
+    margin-left: 0 !important;
+}
+
+.tabulator .tabulator-header .tabulator-col {
+    background-color: transparent !important;
+    border-right: 1px solid #e2e8f0 !important; /* 헤더 컬럼 간 구분선 */
+    height: 40px !important;
+}
+
+/* 정렬 화살표 색상 조정 */
+.tabulator .tabulator-header .tabulator-col .tabulator-col-sorter .tabulator-arrow {
+    border-bottom-color: #94a3b8 !important;
+    border-top-color: #94a3b8 !important;
+}
+
+/* 3. 데이터 셀(Cell) 스타일 */
+.tabulator .tabulator-row .tabulator-cell {
+    padding: 8px 10px !important; /* 컴팩트한 간격 */
+    border-right: 1px dashed #f1f5f9 !important; /* 데이터 열 구분선은 점선으로 은은하게 */
+    color: #475569 !important;
+}
+/* 마지막 컬럼은 우측 테두리 제거 */
+.tabulator .tabulator-row .tabulator-cell:last-child {
+    border-right: none !important;
+}
+
+/* 4. 데이터 행(Row) 스타일 */
+.tabulator .tabulator-row {
+    border-bottom: 1px solid #e2e8f0 !important; /* 얇은 가로선 */
+    background-color: #ffffff !important;
+}
+
+/* 얼룩무늬(Zebra striping) 패턴 - 가독성 향상 */
+.tabulator .tabulator-row.tabulator-row-even {
+    background-color: #fafbfc !important;
+}
+
+/* 5. 마우스 오버(Hover) 효과 */
+.tabulator .tabulator-row:hover {
+    background-color: #e0f2fe !important; /* 마우스 오버 시 연한 파란색으로 하이라이트 */
+    cursor: pointer;
+}
+
+/* 6. 행 선택(Selected) 효과 */
+.tabulator .tabulator-row.tabulator-selected {
+    background-color: #bae6fd !important; /* 선택된 행은 조금 더 진한 파란색 */
+    font-weight: 500;
+}
+
+/* 선택된 행의 마우스 오버 시 색상 */
+.tabulator .tabulator-row.tabulator-selected:hover {
+    background-color: #7dd3fc !important;
+}
+
+/* 7. 데이터가 없을 때 (Placeholder) */
+.tabulator .tabulator-placeholder {
+    color: #94a3b8 !important;
+    font-size: 16px !important;
+    padding: 30px !important;
+}

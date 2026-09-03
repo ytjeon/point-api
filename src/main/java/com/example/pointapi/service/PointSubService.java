@@ -184,7 +184,7 @@ public class PointSubService {
             // 만료 되었을 경우
             if(Long.parseLong(expireDate) < Long.parseLong(today)){
                 if(remainCanceldPoint.equals(BigDecimal.ZERO)) break;
-
+System.out.println("사용취소 신규적립!!");
                 // 신규 적립
                 ReqPointDto newDto = ReqPointDto.builder()
                         .orderNo(orderNo)

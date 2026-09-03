@@ -24,6 +24,11 @@ java -jar point-api.jar
 
 ### API 테스트 방법
  - swagger 주소 : http://localhost:7890/swagger-ui/index.html
+ - 사용자 잔액 조회 화면 : http://localhost:7890/testview
+
+### H2 콘솔 접근법
+ - http://localhost:7890/h2-console 로 접속
+ - jdbc url : jdbc:h2:mem:mydata
 
 ### 첨부파일 설명
  - schema.sql, data.sql :  DB Schema 생성과 기초데이타 생성 sql, 프로그램 기동시 자동 쿼리 실행

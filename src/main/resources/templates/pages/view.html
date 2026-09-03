@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>조회 페이지</title>
+
+    <link rel="stylesheet" href="/vendors/tabulator/tabulator.min.css">
+    <link rel="stylesheet" href="/css/custom-tabulator-style.css">
+
+</head>
+<body>
+    <h3> 사용자 포인트 잔액 조회</h3>
+
+    사용자번호: <input type="text"  id="userNo" value="303" />
+    <button id="searchBtn">조회</button>
+    <span style="margin-left:50px;">
+        이름:<span id="userName" style="margin-right:100px;"></span>
+        잔액:<span id="balancePoint" style="margin-right:50px;"></span>
+    </span>
+    <br/>
+    <hr/>
+    <div class="" style="height:400px;">
+        <table id="detailTable01" class="table dataTable table-striped table-bordered table-sm"  >
+        </table>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="/vendors/jquery/jquery.js"></script>
+    <!-- tabulator -->
+    <script src="/vendors/tabulator/tabulator.min.js"></script>
+    <script src="/javascript/customlib/tabulatorlib.js"></script>
+    <script src="/javascript/test/view.js"></script>
+    <script>
+        dataDetail01Table.init();
+
+    </script>
+</body>
+</html>
