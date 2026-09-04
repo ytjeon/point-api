@@ -56,6 +56,14 @@ public class PointService{
                 .userNo(userNo)
                 .build();
         List<PointAccuMstDto> accuList = pointMapper.getPointAccuList(selAccu);
+
+        String today = LocalDate.now().toString();
+        //System.out.println("2026-09-07".compareTo(today));
+        // 만료일자 체크
+        accuList.removeIf( m->
+                m.getExpireDate().compareTo(today) < 0
+        );
+
         if(accuList.isEmpty()){
             // 사용자는 존재하지만 유효한 적립이 없을 경우
             BalancePointDto emptyDto = BalancePointDto.builder()
@@ -146,13 +154,6 @@ public class PointService{
                 // 잔액부족
                 return new ResponseObject<>(ResultCodeEnum.BALANCELIMIT);
             } else{
-                String today = LocalDate.now().toString();
-                //System.out.println("2026-09-07".compareTo(today));
-
-                // 만료일자 체크
-                pointList.removeIf( m->
-                        m.getExpireDate().compareTo(today) < 0
-                );
                 // 이미 sql 쿼리로 정렬 했지만 혹시 모르니..
                 pointList.sort(
                         Comparator.comparing(PointAccuMstDto::getPointAccuType).reversed() // 포인트 적립 타입: 내림차순
