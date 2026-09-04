@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
@@ -145,11 +146,20 @@ public class PointService{
                 // 잔액부족
                 return new ResponseObject<>(ResultCodeEnum.BALANCELIMIT);
             } else{
+                String today = LocalDate.now().toString();
+                //System.out.println("2026-09-07".compareTo(today));
+
+                // 만료일자 체크
+                pointList.removeIf( m->
+                        m.getExpireDate().compareTo(today) < 0
+                );
                 // 이미 sql 쿼리로 정렬 했지만 혹시 모르니..
                 pointList.sort(
                         Comparator.comparing(PointAccuMstDto::getPointAccuType).reversed() // 포인트 적립 타입: 내림차순
                                 .thenComparing(PointAccuMstDto::getExpireDate)           // 만료일자: 오름차순
                 );
+
+
 
                 // 포인트 사용 => 잔액 차감 update 작업
                 try {
